@@ -1,9 +1,16 @@
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import PainelControle from "./pages/PainelControle";
+import AdicionaFuncionario from "./pages/AdicionaFuncionario";
+import "../node_modules/bootstrap/dist/css/bootstrap.min.css"
 function App() {
-  return (
-    <div className="App">
-      <h1>gosto de góticas</h1>
-    </div>
-  );
+	return (
+		<Router>
+			<Routes>
+				<Route exact path="/" element={<PainelControle />} />
+				<Route exact path="/adicionafuncionario" element={<AdicionaFuncionario/>}/>
+			</Routes>
+		</Router>
+	);
 }
 
 export default App;
