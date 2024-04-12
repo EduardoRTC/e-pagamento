@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import PainelControle from "./pages/PainelControle";
+import PainelControle from "./pages/PainelControlePagina";
 import AdicionaFuncionario from "./pages/AdicionaFuncionario";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css"
 function App() {
