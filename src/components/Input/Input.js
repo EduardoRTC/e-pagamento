@@ -8,7 +8,7 @@ export default function Input({ nome, tipo, onChange }) {
     return (
         <>
             <Label>{nome}</Label>
-            <input type={tipo} name={nome} placeholder={`${nome} do funcionário`} className="form-control w-50 rounded-pill border-primary " onChange={handleChange} />
+            <input type={tipo} name={nome} placeholder={`${nome} do funcionário`} className="form-control w-50 rounded-pill border-primary " onChange={handleChange} required={true} />
         </>
 
     )

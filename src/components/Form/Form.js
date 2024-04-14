@@ -10,17 +10,18 @@ export default function Form() {
     let navegar = useNavigate()
 
     const [funcionario, setFuncionario] = useState({
-        ativo: true,
-        Nome: "",
-        Sexo: "",
-        salarioMaternidade: 0,
+        Ativo: true,
+        nome: "",
+        sexo: "",
+        nasc: "",
+        salarioMaternidade: false,
         cpf: "",
-        Cargo: "",
-        salarioBruto: 0,
-        commisionado: false,
-        tipoDeContrato: "",
-        salarioFamilia: false,
-        numeroQuotas: "",
+        cargo: "",
+        salario: 0,
+        comissionado: false,
+        tipoContrato: "",
+        numeroFilhos: 0,
+        SalarioFamilia: false,
         valeTransporte: false,
         contribuicaoSindical: false,
         jornadaTrabalho: "",
@@ -30,18 +31,20 @@ export default function Form() {
     });
 
     const {
-        Nome,
-        Sexo,
+        ativo,
+        nome,
+        sexo,
+        nasc,
         salarioMaternidade,
         cpf,
-        Cargo,
-        salarioBruto,
-        commisionado,
-        tipoDeContrato,
-        salarioFamilia,
-        numeroQuotas,
+        cargo,
+        salario,
+        comissionado,
+        tipoContrato,
+        numeroFilhos,
+        SalarioFamilia,
         valeTransporte,
-        contribuicaoSindical,
+        ContribuicaoSindical,
         jornadaTrabalho,
         insalubridade,
         adicionalPericulosidade,
@@ -49,9 +52,11 @@ export default function Form() {
     } = funcionario;
 
     const AomudarInput = (e) => {
-        setFuncionario({ ...funcionario, [e.target.name]: e.target.value });
-        console.log(e.target.value)
+        const value = e.target.type === 'number' ? parseFloat(e.target.value) : e.target.value;
+        setFuncionario({ ...funcionario, [e.target.name]: value });
+        console.log(value);
     };
+
 
     useEffect(() => {
         console.log(funcionario.Cargo);
@@ -60,29 +65,37 @@ export default function Form() {
 
     const Aosubmeter = async (e) => {
         e.preventDefault();
+        console.log(funcionario);
         await axios.post("http://localhost:3500/api", funcionario);
         navegar("/");
     };
 
     return (
-        <form className='form'>
-            <Input nome='Nome' tipo='text' onChange={(e) => AomudarInput(e)} />
-            <Select nome="Sexo" opcoes={[{ label: "Masculino", value: "M" }, { label: "Feminino", value: "F" }]} onChange={(e) => AomudarInput(e)} />
-            <Select nome="Salário maternidade" opcoes={[{ label: "Sim", value: true }, { label: "Não", value: false }]} onChange={(e) => AomudarInput(e)} />
-            <Input nome="CPF" tipo="number" onChange={(e) => AomudarInput(e)} />
-            <Input nome="Cargo" tipo="text" onChange={(e) => AomudarInput(e)} />
-            <Input nome="Salário Bruto" tipo="number" onChange={(e) => AomudarInput(e)} />
-            <Select nome="Comissionado" opcoes={[{ label: "Sim", value: true }, { label: "Não", value: false }]} onChange={(e) => AomudarInput(e)} />
-            <Select nome="Tipo de Contrato" opcoes={[{ label: "CLT", value: "CLT" }, { label: "Pessoa Jurídica", value: "PJ" }, { label: "Estágio", value: "ESTAGIO" }]} onChange={(e) => AomudarInput(e)} />
-            <Select nome="Salario Familia" opcoes={[{ label: "Sim", value: true }, { label: "Não", value: false }]} onChange={(e) => AomudarInput(e)} />
-            <Input nome="Numero quotas" tipo="number" onChange={(e) => AomudarInput(e)} />
-            <Select nome="Vale Transporte" opcoes={[{ label: "Sim", value: true }, { label: "Não", value: false }]} onChange={(e) => AomudarInput(e)} />
-            <Select nome="Contribuição Sindical" opcoes={[{ label: "Sim", value: true }, { label: "Não", value: false }]} onChange={(e) => AomudarInput(e)} />
-            <Select nome="Jornada de Trabalho" opcoes={[{ label: "Integral", value: "TEMPO_INTEGRAL" }, { label: "Meio Periodo", value: "MEIO_PERIODO" }]} onChange={(e) => AomudarInput(e)} />
-            <Select nome="Insalubridade" opcoes={[{ label: "Mínimo", value: "MINIMO" }, { label: "Médio", value: "MEDIIO" }, { label: "Máximo", value: "MAXIMO" }]} onChange={(e) => AomudarInput(e)} />
-            <Select nome="Adicional de Periculosidade" opcoes={[{ label: "Sim", value: true }, { label: "Não", value: false }]} onChange={(e) => AomudarInput(e)} />
-            <Select nome="Auxílo creche" opcoes={[{ label: "Sim", value: true }, { label: "Não", value: false }]} onChange={(e) => AomudarInput(e)} />
+        <form className='form' onSubmit={(e) => Aosubmeter(e)} >
+            <Input nome='nome' tipo='text' onChange={(e) => AomudarInput(e)} />
+            <Select nome="sexo" opcoes={[{ label: "Masculino", value: "M" }, { label: "Feminino", value: "F" }]} onChange={(e) => AomudarInput(e)} />
+            <label htmlFor='nasc'>Data de nascimento</label>
+            <input name="nasc" type='date' onChange={(e) => AomudarInput(e)} className="form-control w-50 rounded-pill border-primary " />
+            <Select nome="salarioMaternidade" opcoes={[{ label: "Sim", value: true }, { label: "Não", value: false }]} onChange={(e) => AomudarInput(e)} />
+            <Input nome="cpf" tipo="text" onChange={(e) => AomudarInput(e)} />
+            <Input nome="cargo" tipo="text" onChange={(e) => AomudarInput(e)} />
+            <Input nome="salario" tipo="number" onChange={(e) => AomudarInput(e)} />
+            <Select nome="comissionado" opcoes={[{ label: "Sim", value: true }, { label: "Não", value: false }]} onChange={(e) => AomudarInput(e)} />
+            <Select nome="tipoContrato" opcoes={[{ label: "CLT", value: "CLT" }, { label: "Pessoa Jurídica", value: "PJ" }, { label: "Estágio", value: "ESTAGIO" }]} onChange={(e) => AomudarInput(e)} />
+            <Input nome="numeroFilhos" tipo="number" onChange={(e) => AomudarInput(e)} />
+            <Select nome="salarioFamilia" opcoes={[{ label: "Sim", value: true }, { label: "Não", value: false }]} onChange={(e) => AomudarInput(e)} />
+            <Select nome="valeTransporte" opcoes={[{ label: "Sim", value: true }, { label: "Não", value: false }]} onChange={(e) => AomudarInput(e)} />
+            <Select nome="contribuicaoSindical" opcoes={[{ label: "Sim", value: true }, { label: "Não", value: false }]} onChange={(e) => AomudarInput(e)} />
+            <Select nome="jornadaTrabalho" opcoes={[{ label: "Integral", value: "TEMPO_INTEGRAL" }, { label: "Meio Periodo", value: "MEIO_PERIODO" }]} onChange={(e) => AomudarInput(e)} />
+            <Select nome="insalubridade" opcoes={[{ label: "Mínimo", value: "MINIMO" }, { label: "Médio", value: "MEDIO" }, { label: "Máximo", value: "MAXIMO" }]} onChange={(e) => AomudarInput(e)} />
+            <Select nome="adicionalPericulosidade" opcoes={[{ label: "Sim", value: true }, { label: "Não", value: false }]} onChange={(e) => AomudarInput(e)} />
+            <Select nome="auxilioCreche" opcoes={[{ label: "Sim", value: true }, { label: "Não", value: false }]} onChange={(e) => AomudarInput(e)} />
+
+            <button type="submit" className="btn btn-outline-primary">
+                Adicionar
+            </button>
         </form>
     )
+
 }
 

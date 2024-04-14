@@ -9,7 +9,7 @@ export default function AdicionaFuncionario() {
     <>
       <CabecalhoAdicionar />
       <Form />
-      <Link to={'/'} className='btn btn-primary'>Adicionar</Link>
+      <Link to={'/'} className='btn btn-primary'>Cancelar</Link>
 
     </>
   )
