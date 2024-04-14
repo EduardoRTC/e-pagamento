@@ -4,12 +4,9 @@ import Label from '../Label/Label';
 export default function Select({ nome, opcoes, onChange }) {
     const [valorSelecionado, setValorSelecionado] = useState('');
 
-    const mudanca = (e) => {
-        onChange(e);
-    };
-
     const handleChange = (event) => {
         setValorSelecionado(event.target.value);
+        onChange(event);
     };
 
     return (
@@ -19,7 +16,7 @@ export default function Select({ nome, opcoes, onChange }) {
                 <option disabled value="">Selecione uma opção</option>
                 {
                     opcoes.map((opcao, index) => (
-                        <option key={index} value={opcao}>{opcao}</option>
+                        <option key={index} value={opcao.value}>{opcao.label}</option>
                     ))
                 }
             </select>

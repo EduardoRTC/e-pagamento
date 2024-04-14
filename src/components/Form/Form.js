@@ -12,7 +12,7 @@ export default function Form() {
     const [funcionario, setFuncionario] = useState({
         ativo: true,
         Nome: "",
-        sexo: "",
+        Sexo: "",
         salarioMaternidade: 0,
         cpf: "",
         Cargo: "",
@@ -31,7 +31,7 @@ export default function Form() {
 
     const {
         Nome,
-        sexo,
+        Sexo,
         salarioMaternidade,
         cpf,
         Cargo,
@@ -67,21 +67,21 @@ export default function Form() {
     return (
         <form className='form'>
             <Input nome='Nome' tipo='text' onChange={(e) => AomudarInput(e)} />
-            <Select nome="Sexo" opcoes={["M", "F"]} onChange={(e) => AomudarInput(e)} />
-            <Select nome="Salário maternidade" opcoes={["Sim", "Não"]} onChange={(e) => AomudarInput(e)} />
+            <Select nome="Sexo" opcoes={[{ label: "Masculino", value: "M" }, { label: "Feminino", value: "F" }]} onChange={(e) => AomudarInput(e)} />
+            <Select nome="Salário maternidade" opcoes={[{ label: "Sim", value: true }, { label: "Não", value: false }]} onChange={(e) => AomudarInput(e)} />
             <Input nome="CPF" tipo="number" onChange={(e) => AomudarInput(e)} />
             <Input nome="Cargo" tipo="text" onChange={(e) => AomudarInput(e)} />
             <Input nome="Salário Bruto" tipo="number" onChange={(e) => AomudarInput(e)} />
-            <Select nome="Comissionado" opcoes={["Sim", "Não"]} onChange={(e) => AomudarInput(e)} />
-            <Select nome="Tipo de Contrato" opcoes={['CLT', 'PJ', 'ESTAGIO']} onChange={(e) => AomudarInput(e)} />
-            <Select nome="Salario Familia" opcoes={['Sim', "Não"]} onChange={(e) => AomudarInput(e)} />
+            <Select nome="Comissionado" opcoes={[{ label: "Sim", value: true }, { label: "Não", value: false }]} onChange={(e) => AomudarInput(e)} />
+            <Select nome="Tipo de Contrato" opcoes={[{ label: "CLT", value: "CLT" }, { label: "Pessoa Jurídica", value: "PJ" }, { label: "Estágio", value: "ESTAGIO" }]} onChange={(e) => AomudarInput(e)} />
+            <Select nome="Salario Familia" opcoes={[{ label: "Sim", value: true }, { label: "Não", value: false }]} onChange={(e) => AomudarInput(e)} />
             <Input nome="Numero quotas" tipo="number" onChange={(e) => AomudarInput(e)} />
-            <Select nome="Vale Transporte" opcoes={['Sim', "Não"]} onChange={(e) => AomudarInput(e)} />
-            <Select nome="Contribuição Sindical" opcoes={["Sim", "Não"]} onChange={(e) => AomudarInput(e)} />
-            <Select nome="Jornada de Trabalho" opcoes={["Padrão", "Noturno"]} onChange={(e) => AomudarInput(e)} />
-            <Select nome="Insalubridade" opcoes={["Mínimo", "Médio", "Máximo"]} onChange={(e) => AomudarInput(e)} />
-            <Select nome="Adicional de Periculosidade" opcoes={["Sim", "Não"]} onChange={(e) => AomudarInput(e)} />
-            <Select nome="Auxílo creche" opcoes={["Sim", "Não"]} onChange={(e) => AomudarInput(e)} />
+            <Select nome="Vale Transporte" opcoes={[{ label: "Sim", value: true }, { label: "Não", value: false }]} onChange={(e) => AomudarInput(e)} />
+            <Select nome="Contribuição Sindical" opcoes={[{ label: "Sim", value: true }, { label: "Não", value: false }]} onChange={(e) => AomudarInput(e)} />
+            <Select nome="Jornada de Trabalho" opcoes={[{ label: "Integral", value: "TEMPO_INTEGRAL" }, { label: "Meio Periodo", value: "MEIO_PERIODO" }]} onChange={(e) => AomudarInput(e)} />
+            <Select nome="Insalubridade" opcoes={[{ label: "Mínimo", value: "MINIMO" }, { label: "Médio", value: "MEDIIO" }, { label: "Máximo", value: "MAXIMO" }]} onChange={(e) => AomudarInput(e)} />
+            <Select nome="Adicional de Periculosidade" opcoes={[{ label: "Sim", value: true }, { label: "Não", value: false }]} onChange={(e) => AomudarInput(e)} />
+            <Select nome="Auxílo creche" opcoes={[{ label: "Sim", value: true }, { label: "Não", value: false }]} onChange={(e) => AomudarInput(e)} />
         </form>
     )
 }
