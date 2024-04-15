@@ -16,6 +16,12 @@ export default function FuncionarioPainel() {
         const resultado = await axios.get("http://localhost:3500/api")
         setUsuarios(resultado.data)
     }
+
+    const desabilitaFuncionario = async (index) => {
+        const resultado = await axios.put(`http://localhost:3500/api/status/${index}?novoStatus=false`);
+        carregaUsuarios();
+    }
+
     return (
         <div className='container'>
             <div className='py-4'>
@@ -37,7 +43,7 @@ export default function FuncionarioPainel() {
                                             <td className='Funcionario_nome'>{usuario.nome}</td>
                                             <td className='col-md-3 .offset-md-5'>
                                                 <Link className='btn btn-primary mx-10'>editar</Link>
-                                                <button className='btn btn-danger mx-1'>Desabilitar</button>
+                                                <button className='btn btn-danger mx-1' onClick={() => desabilitaFuncionario(usuario.index)}>Desabilitar</button>
                                                 <button className='btn btn-outline-primary mx-0,5'>Holerite</button>
                                             </td>
                                         </tr>
