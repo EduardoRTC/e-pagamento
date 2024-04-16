@@ -44,7 +44,7 @@ export default function FuncionarioPainel() {
                                             <td className='col-md-3 .offset-md-5'>
                                                 <Link className='btn btn-primary mx-10'>editar</Link>
                                                 <button className='btn btn-danger mx-1' onClick={() => desabilitaFuncionario(usuario.index)}>Desabilitar</button>
-                                                <button className='btn btn-outline-primary mx-0,5'>Holerite</button>
+                                                <Link to={`/holeritefuncionario/${usuario.index}`} className='btn btn-outline-primary mx-0,5'>Holerite</Link>
                                             </td>
                                         </tr>
                                     )
