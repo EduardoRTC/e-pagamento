@@ -3,6 +3,7 @@ import CabecalhoAdicionar from '../components/CabecalhoAdicionar/CabecalhoAdicio
 import { Link, useParams } from 'react-router-dom'
 import axios from 'axios';
 import "./HoleritePagina.css"
+import Input from '../components/Input/Input';
 
 export default function HoleritePagina() {
     const [funcionario, setFuncionario] = useState({
@@ -26,9 +27,10 @@ export default function HoleritePagina() {
         auxilioCreche: false,
     });
 
+    const [salarioHoras, setSalarioHoras] = useState(0)
+    const [comissao, setComissao] = useState(0)
 
     const { index } = useParams();
-    console.log(index);
 
     useEffect(() => {
         carregaFuncionario()
@@ -136,12 +138,22 @@ export default function HoleritePagina() {
         return liquido
     }
 
-    function calcularAdicionalPericulosidade(salario,periculosidade) {
+    function calcularAdicionalPericulosidade(salario, periculosidade) {
         const adicional = periculosidade ? 40 : 0;
-        let valor = (salario * adicional ) / 100
+        let valor = (salario * adicional) / 100
         return valor;
     }
 
+    function calculaSalarioHoras(horas, salario) {
+        let horasPorcentagem = (horas * 100) / 220
+        let salarioHora = (salario * horasPorcentagem) / 100
+        setSalarioHoras(salarioHora)
+    }
+
+    function setaComissao(event) {
+        setComissao(parseFloat(event.target.value));
+    }
+    
 
     return (
 
@@ -150,6 +162,8 @@ export default function HoleritePagina() {
             <div>
                 <h1>Holerite</h1>
                 <h2>{funcionario.nome}</h2>
+                <Input nome="Horas Trabalhadas" tipo="number" onChange={(e) => calculaSalarioHoras(e.target.value, funcionario.salario)} />
+                <Input nome="Comissão" tipo="number" desativado={funcionario.comissionado === false ? false : true} onChange={setaComissao} />
                 <table>
                     <tr>
                         <th>Descrição</th>
@@ -157,11 +171,11 @@ export default function HoleritePagina() {
                     </tr>
                     <tr>
                         <td>Salário Bruto</td>
-                        <td>{`R$ ${funcionario.salario}`}</td>
+                        <td>{`R$ ${salarioHoras}`}</td>
                     </tr>
                     <tr>
                         <td>FGTS</td>
-                        <td>{`R$ ${calcularfgts(funcionario.salario)}`}</td>
+                        <td>{`R$ ${calcularfgts(salarioHoras)}`}</td>
                     </tr>
                     <tr>
                         <td>INSS</td>
@@ -169,15 +183,15 @@ export default function HoleritePagina() {
                     </tr>
                     <tr>
                         <td>IRRF</td>
-                        <td>{`R$ ${calcularIRRF(funcionario.salario)}`}</td>
+                        <td>{`R$ ${calcularIRRF(salarioHoras)}`}</td>
                     </tr>
                     <tr>
                         <td>Vale-Transporte</td>
-                        <td>{`R$ ${calcularDescontoVT(funcionario.salario)}`}</td>
+                        <td>{`R$ ${calcularDescontoVT(salarioHoras)}`}</td>
                     </tr>
                     <tr>
                         <td>Vale-Alimentação</td>
-                        <td>{`R$ ${calcularDescontoValeAlimentacao(funcionario.salario)}`}</td>
+                        <td>{`R$ ${calcularDescontoValeAlimentacao(salarioHoras)}`}</td>
                     </tr>
                     <tr>
                         <td>Contribuicao Sindical</td>
@@ -185,19 +199,19 @@ export default function HoleritePagina() {
                     </tr>
                     <tr>
                         <td>Bonus insalubridade</td>
-                        <td>{`R$ ${calcularInsalubridade(funcionario.insalubridade, funcionario.salario)}`}</td>
+                        <td>{`R$ ${calcularInsalubridade(funcionario.insalubridade, salarioHoras)}`}</td>
                     </tr>
                     <tr>
                         <td>Adicional periculosidade</td>
-                        <td>{`R$ ${calcularAdicionalPericulosidade(funcionario.salario,funcionario.adicionalPericulosidade)}`}</td>
+                        <td>{`R$ ${calcularAdicionalPericulosidade(salarioHoras, funcionario.adicionalPericulosidade)}`}</td>
                     </tr>
                     <tr>
                         <td>Total de Descontos</td>
-                        <td>{`R$ ${calcularTotalDescontos(calcularINSS(funcionario.salario), calcularIRRF(funcionario.salario), calcularDescontoVT(funcionario.salario), calcularDescontoValeAlimentacao(funcionario.salario), calcularContribuicaoSindical(funcionario.salario))}`}</td>
+                        <td>{`R$ ${calcularTotalDescontos(calcularINSS(salarioHoras), calcularIRRF(salarioHoras), calcularDescontoVT(salarioHoras), calcularDescontoValeAlimentacao(salarioHoras), calcularContribuicaoSindical(salarioHoras))}`}</td>
                     </tr>
                     <tr>
                         <td>Salário Líquido</td>
-                        <td>{`R$ ${(calculaLiquido(funcionario.salario).toFixed(2))}`}</td>
+                        <td>{`R$ ${(calculaLiquido(salarioHoras) + comissao).toFixed(2)}`}</td>
                     </tr>
                 </table>
                 <Link to={"/"} className='btn btn-primary'>Voltar</Link>

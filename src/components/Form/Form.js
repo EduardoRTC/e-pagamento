@@ -76,7 +76,7 @@ export default function Form() {
             <Select nome="sexo" opcoes={[{ label: "Masculino", value: "M" }, { label: "Feminino", value: "F" }]} onChange={(e) => AomudarInput(e)} />
             <label htmlFor='nasc'>Data de nascimento</label>
             <input name="nasc" type='date' onChange={(e) => AomudarInput(e)} className="form-control w-50 rounded-pill border-primary " />
-            <Select nome="salarioMaternidade" opcoes={[{ label: "Sim", value: true }, { label: "Não", value: false }]} onChange={(e) => AomudarInput(e)} />
+            <Select nome="salarioMaternidade" opcoes={[{ label: "Sim", value: true }, { label: "Não", value: false }]} onChange={(e) => AomudarInput(e)} desativado={funcionario.sexo === "F" ? false : true} />
             <Input nome="cpf" tipo="text" onChange={(e) => AomudarInput(e)} />
             <Input nome="cargo" tipo="text" onChange={(e) => AomudarInput(e)} />
             <Input nome="salario" tipo="number" onChange={(e) => AomudarInput(e)} />
