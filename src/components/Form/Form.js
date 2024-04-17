@@ -89,7 +89,6 @@ export default function Form() {
             <Select nome="jornadaTrabalho" opcoes={[{ label: "Integral", value: "TEMPO_INTEGRAL" }, { label: "Meio Periodo", value: "MEIO_PERIODO" }]} onChange={(e) => AomudarInput(e)} />
             <Select nome="insalubridade" opcoes={[{ label: "Mínimo", value: "MINIMO" }, { label: "Médio", value: "MEDIO" }, { label: "Máximo", value: "MAXIMO" }]} onChange={(e) => AomudarInput(e)} />
             <Select nome="adicionalPericulosidade" opcoes={[{ label: "Sim", value: true }, { label: "Não", value: false }]} onChange={(e) => AomudarInput(e)} />
-            <Select nome="auxilioCreche" opcoes={[{ label: "Sim", value: true }, { label: "Não", value: false }]} onChange={(e) => AomudarInput(e)} />
 
             <button type="submit" className="btn btn-outline-primary">
                 Adicionar

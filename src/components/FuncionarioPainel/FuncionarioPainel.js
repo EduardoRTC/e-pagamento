@@ -42,7 +42,6 @@ export default function FuncionarioPainel() {
                                             <th scope='row' className='col-sm-1'>{usuario.index}</th>
                                             <td className='Funcionario_nome'>{usuario.nome}</td>
                                             <td className='col-md-3 .offset-md-5'>
-                                                <Link className='btn btn-primary mx-10'>editar</Link>
                                                 <button className='btn btn-danger mx-1' onClick={() => desabilitaFuncionario(usuario.index)}>Desabilitar</button>
                                                 <Link to={`/holeritefuncionario/${usuario.index}`} className='btn btn-outline-primary mx-0,5'>Holerite</Link>
                                             </td>

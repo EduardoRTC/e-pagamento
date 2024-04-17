@@ -8,7 +8,6 @@ export default function Cabecalho() {
         <header className="header">
             <p className="logo">E-pagamento</p>
             <div className="header-direita">
-                <button className='btn btn-dark'>Pesquisar</button>
                 <Link to={'/adicionafuncionario'} className='btn btn-primary'>Adicionar</Link>
             </div>
         </header>
