@@ -31,7 +31,6 @@
   float: right;
   justify-content: space-between;
   width: 250px;
-  align-items: center;
 }
 
 @media screen and (max-width: 500px) {
@@ -45,3 +44,4 @@
     float: none;
   }
 }
+
